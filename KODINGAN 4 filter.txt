@@ -1,4 +1,4 @@
-NAMA : M.SIHABFUDIN ALFIYAN
+
 1.kodingan EROSI
 
 import cv2
