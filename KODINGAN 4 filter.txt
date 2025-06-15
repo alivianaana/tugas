@@ -1,89 +1,228 @@
-
-1.kodingan EROSI
-
-import cv2
+OPENING
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-# Load kedua gambar
-img1 = cv2.imread('1.png', cv2.IMREAD_GRAYSCALE)
-img2 = cv2.imread('2.png', cv2.IMREAD_GRAYSCALE)
+# Fungsi untuk membaca gambar dan melakukan operasi opening
+def proses_opening(nama_file):
+    # Pastikan file ada
+    if not os.path.exists(nama_file):
+        print(f"File '{nama_file}' tidak ditemukan.")
+        return None, None
 
-# Membuat kernel untuk erosi
-kernel = np.ones((3, 3), np.uint8)
+    # Baca gambar dalam mode grayscale
+    image = cv2.imread(nama_file, cv2.IMREAD_GRAYSCALE)
 
-# Menerapkan erosi
-erosion1 = cv2.erode(img1, kernel, iterations=1)
-erosion2 = cv2.erode(img2, kernel, iterations=1)
+    # Buat kernel 5x5
+    kernel = np.ones((5, 5), np.uint8)
 
-# Fungsi untuk menampilkan gambar original dan hasil erosi
-def show_results(original, result, title):
-    plt.figure(figsize=(10, 4))
-    
-    plt.subplot(1, 2, 1)
-    plt.imshow(original, cmap='gray')
-    plt.title(f'{title} - Original')
+    # Lakukan operasi opening (erosi → dilasi)
+    opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+
+    return image, opening
+
+# Proses gambar pertama
+img1, hasil1 = proses_opening('1.png')
+
+# Proses gambar kedua
+img2, hasil2 = proses_opening('2.png')
+
+# Tampilkan hasil (jika kedua gambar ditemukan)
+plt.figure(figsize=(12, 6))
+
+if img1 is not None:
+    plt.subplot(2, 2, 1)
+    plt.title("1.png - Asli")
+    plt.imshow(img1, cmap='gray')
     plt.axis('off')
-    
-    plt.subplot(1, 2, 2)
-    plt.imshow(result, cmap='gray')
-    plt.title(f'{title} - Erosion')
+
+    plt.subplot(2, 2, 2)
+    plt.title("1.png - Opening")
+    plt.imshow(hasil1, cmap='gray')
     plt.axis('off')
+
+if img2 is not None:
+    plt.subplot(2, 2, 3)
+    plt.title("2.png - Asli")
+    plt.imshow(img2, cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(2, 2, 4)
+    plt.title("2.png - Opening")
+    plt.imshow(hasil2, cmap='gray')
+    plt.axis('off')
+
+plt.tight_layout()
+plt.show()
+
+CLOSING
+
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+# Fungsi untuk membaca gambar dan melakukan operasi closing
+def proses_closing(nama_file):
+    # Pastikan file ada
+    if not os.path.exists(nama_file):
+        print(f"File '{nama_file}' tidak ditemukan.")
+        return None, None
     
-    plt.show()
+    # Baca gambar dalam mode grayscale
+    image = cv2.imread(nama_file, cv2.IMREAD_GRAYSCALE)
+
+    # Buat kernel 5x5
+    kernel = np.ones((5, 5), np.uint8)
+
+    # Lakukan operasi closing
+    closing = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
+
+    return image, closing
+
+# Proses gambar pertama
+img1, result1 = proses_closing('1.png')
+
+# Proses gambar kedua
+img2, result2 = proses_closing('2.png')
+
+# Tampilkan hasil (jika kedua gambar ditemukan)
+plt.figure(figsize=(12, 6))
+
+if img1 is not None:
+    plt.subplot(2, 2, 1)
+    plt.title("1.png - Asli")
+    plt.imshow(img1, cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(2, 2, 2)
+    plt.title("1.png - Closing")
+    plt.imshow(result1, cmap='gray')
+    plt.axis('off')
+
+if img2 is not None:
+    plt.subplot(2, 2, 3)
+    plt.title("2.png - Asli")
+    plt.imshow(img2, cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(2, 2, 4)
+    plt.title("2.png - Closing")
+    plt.imshow(result2, cmap='gray')
+    plt.axis('off')
+
+plt.tight_layout()
+plt.show()
+
+DILASI
+
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+# Fungsi untuk membaca gambar dan melakukan operasi dilasi
+def proses_dilasi(nama_file):
+    # Pastikan file ada
+    if not os.path.exists(nama_file):
+        print(f"File '{nama_file}' tidak ditemukan.")
+        return None, None
+
+    # Baca gambar dalam mode grayscale
+    image = cv2.imread(nama_file, cv2.IMREAD_GRAYSCALE)
+
+    # Buat kernel 5x5
+    kernel = np.ones((5, 5), np.uint8)
+
+    # Lakukan operasi dilasi
+    dilasi = cv2.dilate(image, kernel, iterations=1)
+
+    return image, dilasi
+
+# Proses gambar pertama
+img1, hasil1 = proses_dilasi('1.png')
+
+# Proses gambar kedua
+img2, hasil2 = proses_dilasi('2.png')
 
 # Tampilkan hasil
-show_results(img1, erosion1, '1.png')
-show_results(img2, erosion2, '2.png')
+plt.figure(figsize=(12, 6))
 
+if img1 is not None:
+    plt.subplot(2, 2, 1)
+    plt.title("1.png - Asli")
+    plt.imshow(img1, cmap='gray')
+    plt.axis('off')
 
-2.kodingan DILASI
+    plt.subplot(2, 2, 2)
+    plt.title("1.png - Dilasi")
+    plt.imshow(hasil1, cmap='gray')
+    plt.axis('off')
 
+if img2 is not None:
+    plt.subplot(2, 2, 3)
+    plt.title("2.png - Asli")
+    plt.imshow(img2, cmap='gray')
+    plt.axis('off')
 
-# Dilasi (dilation) untuk gambar 1.png dan 2.png
+    plt.subplot(2, 2, 4)
+    plt.title("2.png - Dilasi")
+    plt.imshow(hasil2, cmap='gray')
+    plt.axis('off')
 
-# Dilasi
-dilation1 = cv2.dilate(img1, kernel, iterations=1)
-dilation2 = cv2.dilate(img2, kernel, iterations=1)
+plt.tight_layout()
+plt.show()
 
-# Simpan hasil
-dilated1_path = "/mnt/data/1_dilated.png"
-dilated2_path = "/mnt/data/2_dilated.png"
-cv2.imwrite(dilated1_path, dilation1)
-cv2.imwrite(dilated2_path, dilation2)
+EROSI
+import numpy as np
+import matplotlib.pyplot as plt
+import os
 
-dilated1_path, dilated2_path
+# Fungsi untuk membaca gambar dan melakukan erosi
+def proses_erosi(nama_file):
+    if not os.path.exists(nama_file):
+        print(f"File '{nama_file}' tidak ditemukan.")
+        return None, None
 
-						
-3.kodingan OPENING
+    # Baca gambar dalam grayscale
+    image = cv2.imread(nama_file, cv2.IMREAD_GRAYSCALE)
 
+    # Kernel 5x5
+    kernel = np.ones((5, 5), np.uint8)
 
-# Opening (erosi diikuti oleh dilasi) untuk gambar 1.png dan 2.png
+    # Lakukan operasi erosi
+    erosi = cv2.erode(image, kernel, iterations=1)
 
-# Proses opening
-opening1 = cv2.morphologyEx(img1, cv2.MORPH_OPEN, kernel)
-opening2 = cv2.morphologyEx(img2, cv2.MORPH_OPEN, kernel)
+    return image, erosi
 
-# Simpan hasil
-opening1_path = "/mnt/data/1_opening.png"
-opening2_path = "/mnt/data/2_opening.png"
-cv2.imwrite(opening1_path, opening1)
-cv2.imwrite(opening2_path, opening2)
+# Proses gambar 1
+img1, hasil_erosi1 = proses_erosi('1.png')
 
-opening1_path, opening2_path
+# Proses gambar 2
+img2, hasil_erosi2 = proses_erosi('2.png')
 
-4.kodingan CLOSING
+# Tampilkan hasil
+plt.figure(figsize=(12, 6))
 
-# Closing (dilasi diikuti oleh erosi) untuk gambar 1.png dan 2.png
+if img1 is not None:
+    plt.subplot(2, 2, 1)
+    plt.title("1.png - Asli")
+    plt.imshow(img1, cmap='gray')
+    plt.axis('off')
 
-# Proses closing
-closing1 = cv2.morphologyEx(img1, cv2.MORPH_CLOSE, kernel)
-closing2 = cv2.morphologyEx(img2, cv2.MORPH_CLOSE, kernel)
+    plt.subplot(2, 2, 2)
+    plt.title("1.png - Erosi")
+    plt.imshow(hasil_erosi1, cmap='gray')
+    plt.axis('off')
 
-# Simpan hasil
-closing1_path = "/mnt/data/1_closing.png"
-closing2_path = "/mnt/data/2_closing.png"
-cv2.imwrite(closing1_path, closing1)
-cv2.imwrite(closing2_path, closing2)
+if img2 is not None:
+    plt.subplot(2, 2, 3)
+    plt.title("2.png - Asli")
+    plt.imshow(img2, cmap='gray')
+    plt.axis('off')
 
-closing1_path, closing2_path
+    plt.subplot(2, 2, 4)
+    plt.title("2.png - Erosi")
+    plt.imshow(hasil_erosi2, cmap='gray')
+    plt.axis('off')
+
+plt.tight_layout()
+plt.show()
