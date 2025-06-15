@@ -1,0 +1,72 @@
+NAMA : M.SIHABFUDIN ALFIYAN
+		
+					KESIMPULAN
+
+1. Erosi
+Fungsi: Mengurangi objek terang, menghilangkan noise kecil terang.
+Efek:
+
+Menyusutkan batas objek.
+
+Menghapus titik-titik kecil terang.
+
+Cocok digunakan jika:
+
+Gambar memiliki banyak noise kecil terang.
+
+Ingin memisahkan objek yang terlalu rapat.
+
+2. Dilasi
+Fungsi: Menambah objek terang, menutup lubang kecil dalam objek.
+Efek:
+
+Memperbesar batas objek.
+
+Menutup celah kecil atau lubang gelap.
+
+Cocok digunakan jika:
+
+Objek utama terlihat bolong atau kurang jelas.
+
+Ingin menghubungkan bagian-bagian objek terang.
+
+3. Opening 
+Fungsi: Menghapus noise kecil tanpa merusak bentuk utama objek.
+Efek:
+
+Menghapus bintik terang kecil.
+
+Menjaga bentuk objek asli.
+
+Cocok digunakan jika:Ingin menghilangkan noise dari background terang.
+
+Objek utama perlu tetap halus dan bersih.
+
+4. Closing 
+Fungsi: Menutup lubang atau celah kecil dalam objek terang.
+Efek:
+
+Mengisi bagian kosong kecil.
+
+Membuat bentuk objek menjadi utuh.
+
+Cocok digunakan jika:Objek memiliki lubang atau celah kecil gelap.
+
+Ingin menyambungkan bagian objek yang terputus.
+
+
+Kesimpulan:
+-> Untuk Gambar 1.png:
+Jika gambar ini memiliki banyak noise kecil terang atau bintik-bintik yang mengganggu, Opening adalah pilihan terbaik.
+
+Jika gambar ini memiliki lubang atau retakan pada objek utama, Closing akan lebih baik karena menyambung dan memperbaiki bentuk objek.
+
+Rekomendasi umum: Opening, karena biasanya digunakan untuk cleaning awal tanpa merusak objek.
+
+-> Untuk Gambar 2.png:
+Jika terlihat celah atau bolong-bolong dalam bentuk objek, Closing akan menyempurnakannya.
+
+Jika objek utama perlu ditingkatkan ketebalannya dan menyatu lebih jelas, Dilasi bisa membantu—tapi mungkin terlalu agresif tanpa kontrol.
+
+Rekomendasi umum: Closing, karena memperbaiki bentuk objek dan mempertahankan keutuhannya.
+

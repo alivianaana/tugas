@@ -1,0 +1,89 @@
+NAMA : M.SIHABFUDIN ALFIYAN
+1.kodingan EROSI
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load kedua gambar
+img1 = cv2.imread('1.png', cv2.IMREAD_GRAYSCALE)
+img2 = cv2.imread('2.png', cv2.IMREAD_GRAYSCALE)
+
+# Membuat kernel untuk erosi
+kernel = np.ones((3, 3), np.uint8)
+
+# Menerapkan erosi
+erosion1 = cv2.erode(img1, kernel, iterations=1)
+erosion2 = cv2.erode(img2, kernel, iterations=1)
+
+# Fungsi untuk menampilkan gambar original dan hasil erosi
+def show_results(original, result, title):
+    plt.figure(figsize=(10, 4))
+    
+    plt.subplot(1, 2, 1)
+    plt.imshow(original, cmap='gray')
+    plt.title(f'{title} - Original')
+    plt.axis('off')
+    
+    plt.subplot(1, 2, 2)
+    plt.imshow(result, cmap='gray')
+    plt.title(f'{title} - Erosion')
+    plt.axis('off')
+    
+    plt.show()
+
+# Tampilkan hasil
+show_results(img1, erosion1, '1.png')
+show_results(img2, erosion2, '2.png')
+
+
+2.kodingan DILASI
+
+
+# Dilasi (dilation) untuk gambar 1.png dan 2.png
+
+# Dilasi
+dilation1 = cv2.dilate(img1, kernel, iterations=1)
+dilation2 = cv2.dilate(img2, kernel, iterations=1)
+
+# Simpan hasil
+dilated1_path = "/mnt/data/1_dilated.png"
+dilated2_path = "/mnt/data/2_dilated.png"
+cv2.imwrite(dilated1_path, dilation1)
+cv2.imwrite(dilated2_path, dilation2)
+
+dilated1_path, dilated2_path
+
+						
+3.kodingan OPENING
+
+
+# Opening (erosi diikuti oleh dilasi) untuk gambar 1.png dan 2.png
+
+# Proses opening
+opening1 = cv2.morphologyEx(img1, cv2.MORPH_OPEN, kernel)
+opening2 = cv2.morphologyEx(img2, cv2.MORPH_OPEN, kernel)
+
+# Simpan hasil
+opening1_path = "/mnt/data/1_opening.png"
+opening2_path = "/mnt/data/2_opening.png"
+cv2.imwrite(opening1_path, opening1)
+cv2.imwrite(opening2_path, opening2)
+
+opening1_path, opening2_path
+
+4.kodingan CLOSING
+
+# Closing (dilasi diikuti oleh erosi) untuk gambar 1.png dan 2.png
+
+# Proses closing
+closing1 = cv2.morphologyEx(img1, cv2.MORPH_CLOSE, kernel)
+closing2 = cv2.morphologyEx(img2, cv2.MORPH_CLOSE, kernel)
+
+# Simpan hasil
+closing1_path = "/mnt/data/1_closing.png"
+closing2_path = "/mnt/data/2_closing.png"
+cv2.imwrite(closing1_path, closing1)
+cv2.imwrite(closing2_path, closing2)
+
+closing1_path, closing2_path
